@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Season 3 — RTGS Premier Golf League</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy:       #0a1628;
+      --navy-mid:   #0f1f38;
+      --navy-lt:    #162847;
+      --gold:       #c9a84c;
+      --gold-lt:    #e8c97a;
+      --gold-dk:    #a07830;
+      --white:      #ffffff;
+      --grey:       #9faec0;
+      --grey-lt:    #d0d8e4;
+      --border:     rgba(201,168,76,0.18);
+
+      /* Team colours */
+      --td-primary: #1a3a5c;
+      --td-accent:  #4a90c4;
+      --tr-primary: #3a1a1a;
+      --tr-accent:  #c44a4a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--navy);
+      font-family: 'Raleway', sans-serif;
+      color: var(--white);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: 0.5; pointer-events: none; z-index: 0;
+    }
+
+    .top-bar {
+      position: fixed; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(to right, transparent, var(--gold), var(--gold-lt), var(--gold), transparent);
+      z-index: 200;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 3px; left: 0; right: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 72px;
+      background: rgba(10,22,40,0.94); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+      z-index: 100;
+    }
+    .nav-back {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--grey);
+      font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; font-weight: 300;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--gold); }
+    .nav-back:hover svg { transform: translateX(-3px); }
+    .nav-back svg { transition: transform 0.2s; }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 500; letter-spacing: 0.12em;
+      color: var(--white); text-transform: uppercase;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-right {
+      font-size: 10px; letter-spacing: 0.38em; text-transform: uppercase;
+      color: var(--grey); font-weight: 300;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; padding: 100px 48px 40px; text-align: center; overflow: hidden;
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.5) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--gold); font-weight: 400; margin-bottom: 12px;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.9s 0.1s ease both;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase; line-height: 1;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.9s 0.2s ease both;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold); font-weight: 400; }
+    .hero-sub {
+      margin-top: 10px; font-size: 0.82rem;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--grey); font-weight: 300;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.9s 0.35s ease both;
+    }
+    .hero-divider {
+      display: flex; align-items: center; justify-content: center;
+      margin: 20px auto 0; width: 280px; max-width: 90%;
+      position: relative; z-index: 1;
+      animation: fadeIn 0.9s 0.5s ease both;
+    }
+    .hero-divider-line { flex: 1; height: 1px; background: rgba(201,168,76,0.25); }
+    .hero-divider-orn { display: flex; align-items: center; gap: 8px; padding: 0 14px; flex-shrink: 0; }
+    .diam    { width: 5px; height: 5px; background: var(--gold);    transform: rotate(45deg); }
+    .diam-sm { width: 3px; height: 3px; background: var(--gold-dk); transform: rotate(45deg); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+
+    /* ── Content wrapper ── */
+    .content {
+      position: relative; z-index: 1;
+      max-width: 1120px; margin: 0 auto; padding: 32px 48px 80px;
+    }
+
+    /* ── Section header ── */
+    .section-header {
+      display: flex; align-items: center; gap: 20px; margin-bottom: 20px;
+    }
+    .section-header-line { flex: 1; height: 1px; background: var(--border); }
+    .section-label {
+      font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500; flex-shrink: 0;
+    }
+
+    /* ── Stats row ── */
+    .stats-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); margin-bottom: 40px;
+    }
+    .stat-cell {
+      background: var(--navy); padding: 22px 20px; text-align: center;
+      transition: background 0.2s;
+    }
+    .stat-cell:hover { background: var(--navy-mid); }
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 500; color: var(--gold); line-height: 1;
+    }
+    .stat-label {
+      margin-top: 6px; font-size: 11px; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--grey); font-weight: 400;
+    }
+
+    /* ── Team clash banner ── */
+    .team-clash {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      gap: 0; border: 1px solid var(--border); margin-bottom: 40px;
+    }
+    .team-panel {
+      padding: 28px 32px; text-align: center; position: relative; overflow: hidden;
+    }
+    .team-panel-d { background: linear-gradient(135deg, var(--td-primary) 0%, var(--navy) 100%); }
+    .team-panel-r { background: linear-gradient(225deg, var(--tr-primary) 0%, var(--navy) 100%); }
+    .team-panel::before {
+      content: ''; position: absolute; inset: 0; opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .team-eyebrow {
+      font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--grey); font-weight: 300; margin-bottom: 8px;
+    }
+    .team-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 600;
+      letter-spacing: 0.04em; color: var(--white); line-height: 1.1;
+    }
+    .team-accent-d { color: var(--td-accent); }
+    .team-accent-r { color: var(--tr-accent); }
+    .team-sub {
+      margin-top: 6px; font-size: 11px; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--grey); font-weight: 300;
+    }
+    .team-bar {
+      margin-top: 14px; height: 2px; width: 40px;
+    }
+    .team-bar-d { background: var(--td-accent); margin: 14px auto 0; }
+    .team-bar-r { background: var(--tr-accent); margin: 14px auto 0; }
+    .clash-vs {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding: 0 28px;
+      border-left: 1px solid var(--border); border-right: 1px solid var(--border);
+      background: rgba(10,22,40,0.6);
+    }
+    .vs-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 700; color: var(--gold);
+      letter-spacing: 0.08em;
+    }
+    .vs-sub {
+      font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--grey); font-weight: 300; margin-top: 4px;
+    }
+    .clash-score {
+      display: flex; align-items: center; gap: 10px; margin-top: 14px;
+    }
+    .score-box {
+      width: 36px; height: 36px; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--grey);
+    }
+    .score-sep { font-size: 0.7rem; color: var(--grey); letter-spacing: 0.1em; }
+
+    /* ── Roster grids ── */
+    .roster-section { margin-bottom: 40px; }
+    .roster-grids { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .roster-card { border: 1px solid var(--border); overflow: hidden; }
+    .roster-header {
+      padding: 14px 20px; display: flex; align-items: center; gap: 12px;
+    }
+    .roster-header-d { background: rgba(26,58,92,0.6); border-bottom: 1px solid rgba(74,144,196,0.2); }
+    .roster-header-r { background: rgba(58,26,26,0.6); border-bottom: 1px solid rgba(196,74,74,0.2); }
+    .roster-header-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .roster-header-dot-d { background: var(--td-accent); }
+    .roster-header-dot-r { background: var(--tr-accent); }
+    .roster-header-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 500; letter-spacing: 0.05em;
+    }
+    .roster-header-count {
+      margin-left: auto; font-size: 11px; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--grey); font-weight: 300;
+    }
+    .roster-list { list-style: none; }
+    .roster-list li {
+      display: flex; align-items: center; gap: 14px;
+      padding: 9px 20px;
+      border-bottom: 1px solid rgba(201,168,76,0.06);
+      transition: background 0.15s;
+    }
+    .roster-list li:last-child { border-bottom: none; }
+    .roster-list li:hover { background: rgba(201,168,76,0.05); }
+    .roster-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.72rem; color: var(--gold-dk); letter-spacing: 0.08em;
+      width: 24px; flex-shrink: 0;
+    }
+    .roster-name {
+      font-size: 0.9rem; font-weight: 500; color: var(--grey-lt); flex: 1;
+    }
+    .roster-hcp {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--grey); font-weight: 400;
+    }
+
+    /* ── Format section ── */
+    .format-section { margin-bottom: 40px; }
+    .format-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .format-card { background: var(--navy); padding: 22px 20px; transition: background 0.2s; }
+    .format-card:hover { background: var(--navy-mid); }
+    .format-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.72rem; color: var(--gold-dk); letter-spacing: 0.12em; margin-bottom: 10px;
+    }
+    .format-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 500; color: var(--white);
+      margin-bottom: 4px; line-height: 1.2;
+    }
+    .format-subtitle {
+      font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--gold); font-weight: 400; margin-bottom: 12px;
+    }
+    .format-rule { height: 1px; background: var(--border); margin-bottom: 12px; }
+    .format-desc {
+      font-size: 0.82rem; font-weight: 300; color: var(--grey); line-height: 1.65;
+    }
+
+    /* ── Match schedule ── */
+    .schedule-section { margin-bottom: 40px; }
+
+    /* Filter controls */
+    .schedule-controls {
+      display: flex; gap: 10px; margin-bottom: 12px;
+      flex-wrap: wrap; align-items: center;
+    }
+    .filter-wrap { position: relative; flex-shrink: 0; }
+    .filter-select {
+      appearance: none; -webkit-appearance: none;
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      color: var(--grey-lt);
+      font-family: 'Raleway', sans-serif;
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 400;
+      padding: 7px 28px 7px 12px;
+      cursor: pointer; outline: none;
+      transition: border-color 0.2s;
+    }
+    .filter-select:hover, .filter-select:focus { border-color: rgba(201,168,76,0.5); color: var(--white); }
+    .filter-wrap::after {
+      content: '';
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      width: 0; height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid var(--gold-dk);
+      pointer-events: none;
+    }
+    .filter-search {
+      background: var(--navy-mid); border: 1px solid var(--border);
+      color: var(--grey-lt); font-family: 'Raleway', sans-serif;
+      font-size: 10px; letter-spacing: 0.18em;
+      padding: 7px 12px; outline: none;
+      transition: border-color 0.2s; flex: 1; min-width: 140px;
+    }
+    .filter-search::placeholder { color: var(--grey); }
+    .filter-search:hover, .filter-search:focus { border-color: rgba(201,168,76,0.5); color: var(--white); }
+    .filter-count {
+      margin-left: auto; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--grey); font-weight: 300; flex-shrink: 0; align-self: center;
+    }
+
+    .schedule-table {
+      width: 100%; border-collapse: collapse;
+      border: 1px solid var(--border);
+    }
+    .schedule-table thead tr {
+      background: rgba(201,168,76,0.07);
+      border-bottom: 1px solid var(--border);
+    }
+    .schedule-table th {
+      font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500; padding: 12px 16px; text-align: left;
+      white-space: nowrap;
+    }
+    /* Filter row */
+    .schedule-table .filter-row th {
+      padding: 6px 8px; background: rgba(201,168,76,0.04);
+      border-bottom: 1px solid var(--border);
+    }
+    .col-filter {
+      width: 100%; background: transparent; border: 1px solid rgba(201,168,76,0.12);
+      color: var(--grey-lt); font-family: 'Raleway', sans-serif;
+      font-size: 10px; padding: 5px 8px; outline: none; letter-spacing: 0.1em;
+      transition: border-color 0.2s;
+    }
+    .col-filter:focus { border-color: rgba(201,168,76,0.4); }
+    .col-filter-select { appearance: none; -webkit-appearance: none; cursor: pointer; }
+    .col-filter::placeholder { color: rgba(159,174,192,0.5); }
+
+    .schedule-table td {
+      padding: 11px 16px; font-size: 0.88rem; font-weight: 400; color: var(--grey-lt);
+      border-bottom: 1px solid rgba(201,168,76,0.06);
+    }
+    .schedule-table tr:last-child td { border-bottom: none; }
+    .schedule-table tbody tr:hover td { background: rgba(201,168,76,0.04); color: var(--white); }
+    .match-name {
+      font-family: 'Playfair Display', serif; font-size: 0.95rem;
+      font-weight: 400; color: var(--white);
+    }
+    .format-pill {
+      display: inline-block; font-size: 9px; letter-spacing: 0.22em;
+      text-transform: uppercase; padding: 3px 10px; border: 1px solid; font-weight: 500;
+      white-space: nowrap;
+    }
+    .fp-fourballs  { color: #4a90c4; border-color: rgba(74,144,196,0.4); }
+    .fp-scramble   { color: var(--gold); border-color: rgba(201,168,76,0.4); }
+    .fp-alternate  { color: #7abf7a; border-color: rgba(122,191,122,0.4); }
+    .fp-singles    { color: #c44a4a; border-color: rgba(196,74,74,0.4); }
+    .status-tbd {
+      display: inline-block; font-size: 9px; letter-spacing: 0.22em;
+      text-transform: uppercase; padding: 3px 10px;
+      border: 1px solid rgba(138,150,168,0.3); color: var(--grey); font-weight: 400;
+      cursor: pointer; background: none; font-family: 'Raleway', sans-serif;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .status-tbd:hover { border-color: rgba(201,168,76,0.4); color: var(--grey-lt); }
+
+    /* Clickable status result */
+    .status-result {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: none; border: 1px solid var(--border);
+      padding: 3px 10px; cursor: pointer;
+      font-family: 'Raleway', sans-serif; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.14em;
+      transition: border-color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+    .status-result:hover {
+      border-color: var(--gold); background: rgba(201,168,76,0.06);
+    }
+    .status-d { color: var(--td-accent); }
+    .status-r { color: var(--tr-accent); }
+    .status-sep { color: rgba(159,174,192,0.4); font-weight: 300; font-size: 9px; }
+    .status-halved { color: var(--gold); }
+
+    /* Empty state */
+    .table-empty {
+      padding: 32px 16px; text-align: center;
+      font-size: 0.85rem; color: var(--grey); letter-spacing: 0.12em;
+    }
+
+    /* ── Pagination ── */
+    .pagination {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 12px; gap: 12px; flex-wrap: wrap;
+    }
+    .pagination-info {
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--grey); font-weight: 300;
+    }
+    .page-controls { display: flex; align-items: center; gap: 4px; }
+    .page-btn {
+      background: none; border: 1px solid var(--border); color: var(--grey);
+      padding: 5px 11px; cursor: pointer;
+      font-family: 'Raleway', sans-serif; font-size: 11px; letter-spacing: 0.18em;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      min-width: 34px; text-align: center;
+    }
+    .page-btn:hover:not(:disabled) { border-color: rgba(201,168,76,0.5); color: var(--gold-lt); }
+    .page-btn.active { background: rgba(201,168,76,0.12); border-color: var(--gold); color: var(--gold); }
+    .page-btn:disabled { opacity: 0.28; cursor: not-allowed; }
+
+    /* ── Points key ── */
+    .points-section { margin-bottom: 40px; }
+    .points-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .points-cell {
+      background: var(--navy); padding: 20px 20px; text-align: center; transition: background 0.2s;
+    }
+    .points-cell:hover { background: var(--navy-mid); }
+    .points-value {
+      font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 500;
+      color: var(--gold); line-height: 1;
+    }
+    .points-label {
+      margin-top: 5px; font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--grey); font-weight: 400;
+    }
+    .points-desc {
+      margin-top: 6px; font-size: 0.82rem; font-weight: 300; color: var(--grey-lt); line-height: 1.5;
+    }
+    .points-threshold {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      margin-top: 1px; padding: 16px 32px;
+      border: 1px solid var(--border); border-top: none;
+      background: rgba(201,168,76,0.05);
+      font-size: 0.88rem; font-weight: 400; color: var(--grey-lt); letter-spacing: 0.03em;
+    }
+    .points-threshold strong { color: var(--gold); font-weight: 600; }
+    .threshold-diamond { width: 5px; height: 5px; background: var(--gold-dk); transform: rotate(45deg); flex-shrink: 0; }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(5, 12, 25, 0.82);
+      z-index: 400;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      max-width: 540px; width: 90%;
+      max-height: 82vh; overflow-y: auto;
+      position: relative;
+      transform: translateY(16px);
+      transition: transform 0.22s ease;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+
+    .modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+      background: rgba(201,168,76,0.04);
+    }
+    .modal-header-left { display: flex; flex-direction: column; gap: 4px; }
+    .modal-match-num {
+      font-size: 10px; letter-spacing: 0.38em; text-transform: uppercase;
+      color: var(--gold-dk); font-weight: 400;
+    }
+    .modal-match-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 500; color: var(--white); letter-spacing: 0.04em;
+    }
+    .modal-close {
+      background: none; border: 1px solid transparent; color: var(--grey);
+      cursor: pointer; font-size: 1.1rem; line-height: 1;
+      padding: 4px 8px; flex-shrink: 0; margin-top: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .modal-close:hover { border-color: var(--border); color: var(--white); }
+
+    .modal-body { padding: 20px 24px; }
+
+    .modal-meta {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px;
+    }
+    .modal-meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .modal-meta-label {
+      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500;
+    }
+    .modal-meta-value {
+      font-size: 0.88rem; color: var(--grey-lt); font-weight: 400;
+    }
+
+    .modal-divider { height: 1px; background: var(--border); margin: 0 0 18px; }
+
+    .modal-players-label {
+      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500; margin-bottom: 12px;
+    }
+    .modal-team-row {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 10px 14px;
+      border: 1px solid rgba(201,168,76,0.08);
+      margin-bottom: 8px;
+      background: rgba(201,168,76,0.02);
+    }
+    .modal-team-badge {
+      font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase;
+      font-weight: 600; padding: 3px 8px; border: 1px solid; flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .modal-badge-d { color: var(--td-accent); border-color: rgba(74,144,196,0.4); }
+    .modal-badge-r { color: var(--tr-accent); border-color: rgba(196,74,74,0.4); }
+    .modal-team-players { font-size: 0.88rem; color: var(--grey-lt); line-height: 1.6; }
+    .modal-team-score {
+      margin-left: auto; font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 500; flex-shrink: 0; align-self: center;
+    }
+    .modal-score-d { color: var(--td-accent); }
+    .modal-score-r { color: var(--tr-accent); }
+    .modal-score-half { color: var(--gold); }
+    .modal-score-pending { color: var(--grey); font-size: 0.88rem; font-family: 'Raleway', sans-serif; font-weight: 300; letter-spacing: 0.1em; }
+
+    .modal-net-score {
+      margin-top: 14px; padding: 10px 14px;
+      border: 1px solid rgba(201,168,76,0.12);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .modal-net-label {
+      font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500;
+    }
+    .modal-net-value {
+      font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--grey-lt);
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 640px) {
+      nav { padding: 0 16px; height: 56px; }
+      .nav-back { font-size: 10px; letter-spacing: 0.2em; }
+      .nav-brand { font-size: 0.95rem; }
+      .nav-right { display: none; }
+
+      .hero { padding: 76px 20px 32px; }
+      .hero-eyebrow { font-size: 9px; letter-spacing: 0.28em; margin-bottom: 8px; }
+      .hero h1 { font-size: clamp(2rem, 12vw, 3rem); }
+      .hero-sub { font-size: 0.7rem; letter-spacing: 0.18em; }
+      .hero-divider { margin-top: 16px; width: 200px; }
+
+      .content { padding: 20px 16px 60px; }
+
+      .section-header { margin-bottom: 14px; }
+      .section-label { font-size: 10px; letter-spacing: 0.25em; }
+
+      .stats-row { grid-template-columns: repeat(2, 1fr); margin-bottom: 24px; }
+      .stat-cell { padding: 16px 12px; }
+      .stat-value { font-size: 1.6rem; }
+      .stat-label { font-size: 10px; letter-spacing: 0.2em; }
+
+      .team-clash { grid-template-columns: 1fr; margin-bottom: 24px; }
+      .team-panel { padding: 20px 20px; }
+      .team-name { font-size: 1.4rem; }
+      .clash-vs {
+        border-left: none; border-right: none;
+        border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+        padding: 16px 20px; flex-direction: row; gap: 16px;
+      }
+      .vs-label { font-size: 1.2rem; }
+      .vs-sub { margin-top: 0; }
+      .clash-score { margin-top: 0; }
+
+      .roster-section { margin-bottom: 24px; }
+      .roster-grids { grid-template-columns: 1fr; gap: 12px; }
+      .roster-header { padding: 12px 16px; }
+      .roster-list li { padding: 8px 16px; gap: 10px; }
+      .roster-name { font-size: 0.88rem; }
+      .roster-hcp { font-size: 10px; }
+
+      .format-section { margin-bottom: 24px; }
+      .format-grid { grid-template-columns: repeat(2, 1fr); }
+      .format-card { padding: 16px 14px; }
+      .format-title { font-size: 0.95rem; }
+      .format-subtitle { font-size: 9px; letter-spacing: 0.25em; }
+      .format-desc { font-size: 0.78rem; line-height: 1.6; }
+
+      .schedule-section { margin-bottom: 24px; }
+      .schedule-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .schedule-table { min-width: 560px; }
+      .schedule-table th { font-size: 9px; letter-spacing: 0.2em; padding: 10px 12px; }
+      .schedule-table td { font-size: 0.82rem; padding: 9px 12px; }
+      .schedule-controls { gap: 8px; }
+      .filter-count { width: 100%; margin-left: 0; }
+
+      .pagination { flex-direction: column; align-items: flex-start; gap: 8px; }
+
+      .modal { max-height: 90vh; }
+      .modal-meta { grid-template-columns: 1fr; gap: 10px; }
+      .modal-body { padding: 16px; }
+      .modal-header { padding: 14px 16px; }
+
+      .points-section { margin-bottom: 24px; }
+      .points-cell { padding: 16px 12px; }
+      .points-value { font-size: 1.5rem; }
+      .points-label { font-size: 10px; letter-spacing: 0.22em; }
+      .points-desc { font-size: 0.78rem; }
+      .points-threshold { padding: 12px 16px; font-size: 0.82rem; gap: 10px; }
+    }
+
+    /* ── Footer ── */
+    footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    footer .foot-brand {
+      font-family: 'Playfair Display', serif; font-size: 0.85rem;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey);
+    }
+    footer .foot-brand span { color: var(--gold); }
+    footer .foot-copy {
+      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
+      color: rgba(138,150,168,0.45); font-weight: 300;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar"></div>
+
+  <nav>
+    <a href="/" class="nav-back">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M9 2L4 7l5 5" stroke="#8a96a8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Back
+    </a>
+    <div class="nav-brand">RT<span>G</span>S</div>
+    <div class="nav-right">Premier Golf League</div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <p class="hero-eyebrow">RTGS Premier Golf League &nbsp;·&nbsp; 2026</p>
+    <h1>Season <em>Three</em></h1>
+    <p class="hero-sub">Ryder Cup Format &nbsp;·&nbsp; 16 Players &nbsp;·&nbsp; 2 Teams &nbsp;·&nbsp; 10+ Courses</p>
+    <div class="hero-divider">
+      <div class="hero-divider-line"></div>
+      <div class="hero-divider-orn">
+        <div class="diam-sm"></div><div class="diam"></div><div class="diam-sm"></div>
+      </div>
+      <div class="hero-divider-line"></div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="stat-value">16</div>
+        <div class="stat-label">Players</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value">2</div>
+        <div class="stat-label">Teams</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value">10+</div>
+        <div class="stat-label">Courses</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value">4</div>
+        <div class="stat-label">Formats</div>
+      </div>
+    </div>
+
+    <!-- Team clash -->
+    <div class="section-header">
+      <div class="section-label">The Teams</div>
+      <div class="section-header-line"></div>
+    </div>
+    <div class="team-clash">
+      <div class="team-panel team-panel-d">
+        <div class="team-eyebrow">Captain's Side</div>
+        <div class="team-name"><span class="team-accent-d">Team</span><br>Dhurandhar</div>
+        <div class="team-sub">8 Players</div>
+        <div class="team-bar team-bar-d"></div>
+      </div>
+      <div class="clash-vs">
+        <div class="vs-label">VS</div>
+        <div class="vs-sub">Season 3 &nbsp;·&nbsp; 2026</div>
+        <div class="clash-score">
+          <div class="score-box" id="scoreD">–</div>
+          <div class="score-sep">:</div>
+          <div class="score-box" id="scoreR">–</div>
+        </div>
+      </div>
+      <div class="team-panel team-panel-r">
+        <div class="team-eyebrow">Captain's Side</div>
+        <div class="team-name"><span class="team-accent-r">Team</span><br>Rushabh</div>
+        <div class="team-sub">8 Players</div>
+        <div class="team-bar team-bar-r"></div>
+      </div>
+    </div>
+
+    <!-- Rosters -->
+    <div class="roster-section">
+      <div class="section-header">
+        <div class="section-label">Team Rosters</div>
+        <div class="section-header-line"></div>
+      </div>
+      <div class="roster-grids">
+
+        <!-- Team Dhurandhar -->
+        <div class="roster-card">
+          <div class="roster-header roster-header-d">
+            <div class="roster-header-dot roster-header-dot-d"></div>
+            <span class="roster-header-name">Team Dhurandhar</span>
+            <span class="roster-header-count">8 Players</span>
+          </div>
+          <ul class="roster-list">
+            <li><span class="roster-num">D1</span><span class="roster-name">Vikrant Patil</span><span class="roster-hcp">HCP 16</span></li>
+            <li><span class="roster-num">D2</span><span class="roster-name">Anuj Pandey</span><span class="roster-hcp">HCP 14</span></li>
+            <li><span class="roster-num">D3</span><span class="roster-name">Anirudha</span><span class="roster-hcp">HCP 16</span></li>
+            <li><span class="roster-num">D4</span><span class="roster-name">Selva S Sundaram</span><span class="roster-hcp">HCP 16</span></li>
+            <li><span class="roster-num">D5</span><span class="roster-name">Raghu Sundaram</span><span class="roster-hcp">HCP 20</span></li>
+            <li><span class="roster-num">D6</span><span class="roster-name">Hemang C</span><span class="roster-hcp">HCP 20</span></li>
+            <li><span class="roster-num">D7</span><span class="roster-name">Nimesh Dave</span><span class="roster-hcp">HCP 20</span></li>
+            <li><span class="roster-num">D8</span><span class="roster-name">Bala Sankaran</span><span class="roster-hcp">HCP 22</span></li>
+          </ul>
+        </div>
+
+        <!-- Team Rushabh -->
+        <div class="roster-card">
+          <div class="roster-header roster-header-r">
+            <div class="roster-header-dot roster-header-dot-r"></div>
+            <span class="roster-header-name">Team Rushabh</span>
+            <span class="roster-header-count">8 Players</span>
+          </div>
+          <ul class="roster-list">
+            <li><span class="roster-num">R1</span><span class="roster-name">Shailendra Singh</span><span class="roster-hcp">HCP 14</span></li>
+            <li><span class="roster-num">R2</span><span class="roster-name">Satyapal P</span><span class="roster-hcp">HCP 16</span></li>
+            <li><span class="roster-num">R3</span><span class="roster-name">John C</span><span class="roster-hcp">HCP 16</span></li>
+            <li><span class="roster-num">R4</span><span class="roster-name">Rahul R</span><span class="roster-hcp">HCP 16</span></li>
+            <li><span class="roster-num">R5</span><span class="roster-name">Mazz</span><span class="roster-hcp">HCP 20</span></li>
+            <li><span class="roster-num">R6</span><span class="roster-name">Rushabh L</span><span class="roster-hcp">HCP 20</span></li>
+            <li><span class="roster-num">R7</span><span class="roster-name">Srikant N</span><span class="roster-hcp">HCP 22</span></li>
+            <li><span class="roster-num">R8</span><span class="roster-name">DZ</span><span class="roster-hcp">HCP 16</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Formats -->
+    <div class="format-section">
+      <div class="section-header">
+        <div class="section-label">Competition Formats</div>
+        <div class="section-header-line"></div>
+      </div>
+      <div class="format-grid">
+        <div class="format-card">
+          <div class="format-num">01</div>
+          <div class="format-title">Four Balls</div>
+          <div class="format-subtitle">Best Ball</div>
+          <div class="format-rule"></div>
+          <div class="format-desc">Two players per team each play their own ball throughout the hole. The lower score of the pair counts for the team. The side with the lower best-ball score wins the hole.</div>
+        </div>
+        <div class="format-card">
+          <div class="format-num">02</div>
+          <div class="format-title">Scramble</div>
+          <div class="format-subtitle">Texas Scramble</div>
+          <div class="format-rule"></div>
+          <div class="format-desc">Both players tee off, the best shot is selected, and both play from that spot. This continues until the ball is holed. Favours teamwork and consistent ball striking.</div>
+        </div>
+        <div class="format-card">
+          <div class="format-num">03</div>
+          <div class="format-title">Alternate Shot</div>
+          <div class="format-subtitle">Foursomes</div>
+          <div class="format-rule"></div>
+          <div class="format-desc">Partners share a single ball, alternating shots throughout the hole. One player tees off on odd holes, the other on even. Demands precise communication and course management.</div>
+        </div>
+        <div class="format-card">
+          <div class="format-num">04</div>
+          <div class="format-title">Singles</div>
+          <div class="format-subtitle">Match Play · Final</div>
+          <div class="format-rule"></div>
+          <div class="format-desc">One-on-one match play. All 16 players face off in head-to-head singles. The decisive session that determines the Season 3 champion team.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Match Schedule -->
+    <div class="schedule-section">
+      <div class="section-header">
+        <div class="section-label">Match Schedule</div>
+        <div class="section-header-line"></div>
+      </div>
+
+      <!-- Controls -->
+      <div class="schedule-controls">
+        <div class="filter-wrap">
+          <select class="filter-select" id="globalFormat" onchange="applyFilters()">
+            <option value="">All Formats</option>
+            <option value="fourballs">Four Balls</option>
+            <option value="scramble">Scramble</option>
+            <option value="alternate">Alternate Shot</option>
+            <option value="singles">Singles</option>
+          </select>
+        </div>
+        <div class="filter-wrap">
+          <select class="filter-select" id="globalStatus" onchange="applyFilters()">
+            <option value="">All Statuses</option>
+            <option value="tbd">TBD</option>
+            <option value="played">Played</option>
+          </select>
+        </div>
+        <input type="text" class="filter-search" id="globalSearch" placeholder="Search player or course…" oninput="applyFilters()" />
+        <span class="filter-count" id="filterCount"></span>
+      </div>
+
+      <div class="schedule-table-wrap">
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Match</th>
+              <th>Format</th>
+              <th>Course</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+            <tr class="filter-row">
+              <th><input class="col-filter" id="cf-num"    placeholder="—" oninput="applyFilters()" /></th>
+              <th><input class="col-filter" id="cf-name"   placeholder="—" oninput="applyFilters()" /></th>
+              <th>
+                <select class="col-filter col-filter-select" id="cf-format" onchange="applyFilters()">
+                  <option value="">All</option>
+                  <option value="fourballs">Four Balls</option>
+                  <option value="scramble">Scramble</option>
+                  <option value="alternate">Alternate Shot</option>
+                  <option value="singles">Singles</option>
+                </select>
+              </th>
+              <th><input class="col-filter" id="cf-course"  placeholder="—" oninput="applyFilters()" /></th>
+              <th><input class="col-filter" id="cf-date"    placeholder="—" oninput="applyFilters()" /></th>
+              <th>
+                <select class="col-filter col-filter-select" id="cf-status" onchange="applyFilters()">
+                  <option value="">All</option>
+                  <option value="tbd">TBD</option>
+                  <option value="played">Played</option>
+                </select>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="matchTableBody"></tbody>
+        </table>
+      </div>
+
+      <div class="pagination" id="paginationBar"></div>
+    </div>
+
+    <!-- Points system -->
+    <div class="points-section">
+      <div class="section-header">
+        <div class="section-label">Points System</div>
+        <div class="section-header-line"></div>
+      </div>
+      <div class="points-grid">
+        <div class="points-cell">
+          <div class="points-value">1</div>
+          <div class="points-label">Win</div>
+          <div class="points-desc">Team earns 1 point for winning a match</div>
+        </div>
+        <div class="points-cell">
+          <div class="points-value">0.5</div>
+          <div class="points-label">Halve</div>
+          <div class="points-desc">Each team earns 0.5 points for a halved match</div>
+        </div>
+        <div class="points-cell">
+          <div class="points-value">0</div>
+          <div class="points-label">Loss</div>
+          <div class="points-desc">No points awarded to the losing team</div>
+        </div>
+      </div>
+      <div class="points-threshold">
+        <div class="threshold-diamond"></div>
+        <span>First team to reach <strong>14.5 points</strong> wins the Season 3 title</span>
+        <div class="threshold-diamond"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="foot-brand">RT<span>G</span>S &nbsp;Premier Golf League</div>
+    <div class="foot-copy">Season 3 &nbsp;·&nbsp; 2026 &nbsp;—&nbsp; All Rights Reserved</div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="matchModal" onclick="handleOverlayClick(event)">
+    <div class="modal" id="modalBox">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <span class="modal-match-num" id="modalMatchNum"></span>
+          <span class="modal-match-title" id="modalMatchTitle"></span>
+        </div>
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">&#x2715;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    /* ─────────────────────────────────────────────
+       MATCH DATA
+       points: null = TBD, { d: X, r: Y } = played
+       foursome: { d: ['Name','Name'], r: ['Name','Name'] }
+       singles:  { d: 'Name', r: 'Name', netScore: null | '3&2' | '2 up' }
+    ───────────────────────────────────────────── */
+    const MATCHES = [
+      // ── Session 1: Four Balls ──
+      { id:1,  num:'01', name:'Match 1',  format:'fourballs', course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Vikrant Patil','Anuj Pandey'],      r:['Shailendra Singh','Satyapal P'] } },
+      { id:2,  num:'02', name:'Match 2',  format:'fourballs', course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Anirudha','Selva S Sundaram'],      r:['John C','Rahul R'] } },
+      { id:3,  num:'03', name:'Match 3',  format:'fourballs', course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Raghu Sundaram','Hemang C'],        r:['Mazz','Rushabh L'] } },
+      { id:4,  num:'04', name:'Match 4',  format:'fourballs', course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Nimesh Dave','Bala Sankaran'],      r:['Srikant N','DZ'] } },
+
+      // ── Session 2: Scramble ──
+      { id:5,  num:'05', name:'Match 5',  format:'scramble',  course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Vikrant Patil','Raghu Sundaram'],   r:['Shailendra Singh','Mazz'] } },
+      { id:6,  num:'06', name:'Match 6',  format:'scramble',  course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Anuj Pandey','Hemang C'],           r:['Satyapal P','Rushabh L'] } },
+      { id:7,  num:'07', name:'Match 7',  format:'scramble',  course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Anirudha','Nimesh Dave'],           r:['John C','Srikant N'] } },
+      { id:8,  num:'08', name:'Match 8',  format:'scramble',  course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Selva S Sundaram','Bala Sankaran'], r:['Rahul R','DZ'] } },
+
+      // ── Session 3: Alternate Shot ──
+      { id:9,  num:'09', name:'Match 9',  format:'alternate', course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Vikrant Patil','Selva S Sundaram'], r:['Shailendra Singh','Rahul R'] } },
+      { id:10, num:'10', name:'Match 10', format:'alternate', course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Anuj Pandey','Anirudha'],           r:['Satyapal P','John C'] } },
+      { id:11, num:'11', name:'Match 11', format:'alternate', course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Raghu Sundaram','Nimesh Dave'],      r:['Mazz','Srikant N'] } },
+      { id:12, num:'12', name:'Match 12', format:'alternate', course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Hemang C','Bala Sankaran'],         r:['Rushabh L','DZ'] } },
+
+      // ── Session 4: Four Balls ──
+      { id:13, num:'13', name:'Match 13', format:'fourballs', course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Anuj Pandey','Raghu Sundaram'],     r:['Satyapal P','Mazz'] } },
+      { id:14, num:'14', name:'Match 14', format:'fourballs', course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Vikrant Patil','Hemang C'],         r:['Shailendra Singh','Rushabh L'] } },
+      { id:15, num:'15', name:'Match 15', format:'fourballs', course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Anirudha','Bala Sankaran'],         r:['John C','DZ'] } },
+      { id:16, num:'16', name:'Match 16', format:'fourballs', course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Selva S Sundaram','Nimesh Dave'],   r:['Rahul R','Srikant N'] } },
+
+      // ── Session 5: Scramble ──
+      { id:17, num:'17', name:'Match 17', format:'scramble',  course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Vikrant Patil','Nimesh Dave'],     r:['Shailendra Singh','Srikant N'] } },
+      { id:18, num:'18', name:'Match 18', format:'scramble',  course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Anuj Pandey','Bala Sankaran'],     r:['Satyapal P','DZ'] } },
+      { id:19, num:'19', name:'Match 19', format:'scramble',  course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Anirudha','Raghu Sundaram'],       r:['John C','Mazz'] } },
+      { id:20, num:'20', name:'Match 20', format:'scramble',  course:'TBD', date:'TBD 2026', status:'tbd', points:null, foursome:{ d:['Selva S Sundaram','Hemang C'],     r:['Rahul R','Rushabh L'] } },
+
+      // ── Singles ──
+      { id:21, num:'21', name:'Match 21', format:'singles', course:'TBD', date:'TBD 2026', status:'tbd', points:null, singles:{ d:'Vikrant Patil',    r:'Shailendra Singh', netScore:null } },
+      { id:22, num:'22', name:'Match 22', format:'singles', course:'TBD', date:'TBD 2026', status:'tbd', points:null, singles:{ d:'Anuj Pandey',      r:'Satyapal P',       netScore:null } },
+      { id:23, num:'23', name:'Match 23', format:'singles', course:'TBD', date:'TBD 2026', status:'tbd', points:null, singles:{ d:'Anirudha',         r:'John C',           netScore:null } },
+      { id:24, num:'24', name:'Match 24', format:'singles', course:'TBD', date:'TBD 2026', status:'tbd', points:null, singles:{ d:'Selva S Sundaram', r:'Rahul R',          netScore:null } },
+      { id:25, num:'25', name:'Match 25', format:'singles', course:'TBD', date:'TBD 2026', status:'tbd', points:null, singles:{ d:'Raghu Sundaram',   r:'Mazz',             netScore:null } },
+      { id:26, num:'26', name:'Match 26', format:'singles', course:'TBD', date:'TBD 2026', status:'tbd', points:null, singles:{ d:'Hemang C',         r:'Rushabh L',        netScore:null } },
+      { id:27, num:'27', name:'Match 27', format:'singles', course:'TBD', date:'TBD 2026', status:'tbd', points:null, singles:{ d:'Nimesh Dave',      r:'Srikant N',        netScore:null } },
+      { id:28, num:'28', name:'Match 28', format:'singles', course:'TBD', date:'TBD 2026', status:'tbd', points:null, singles:{ d:'Bala Sankaran',    r:'DZ',               netScore:null } },
+    ];
+
+    const PAGE_SIZE = 10;
+    let currentPage = 1;
+    let filteredMatches = [...MATCHES];
+
+    /* ── Format helpers ── */
+    const FORMAT_LABELS = {
+      fourballs: 'Four Balls',
+      scramble:  'Scramble',
+      alternate: 'Alternate Shot',
+      singles:   'Singles'
+    };
+    const FORMAT_PILL_CLASS = {
+      fourballs: 'fp-fourballs',
+      scramble:  'fp-scramble',
+      alternate: 'fp-alternate',
+      singles:   'fp-singles'
+    };
+
+    function formatPill(fmt) {
+      return `<span class="format-pill ${FORMAT_PILL_CLASS[fmt]}">${FORMAT_LABELS[fmt]}</span>`;
+    }
+
+    function statusCell(match) {
+      if (match.status === 'tbd') {
+        return `<button class="status-tbd" onclick="openModal(${match.id})">TBD</button>`;
+      }
+      const { d, r } = match.points;
+      const dClass = d > r ? 'status-d' : (d === r ? 'status-halved' : 'status-d');
+      const rClass = r > d ? 'status-r' : (r === d ? 'status-halved' : 'status-r');
+      return `<button class="status-result" onclick="openModal(${match.id})" title="View match details">
+        <span class="${dClass}">D: ${d}</span>
+        <span class="status-sep">·</span>
+        <span class="${rClass}">R: ${r}</span>
+      </button>`;
+    }
+
+    /* ── Filtering ── */
+    function applyFilters() {
+      const gf     = document.getElementById('globalFormat').value;
+      const gs     = document.getElementById('globalStatus').value;
+      const search = document.getElementById('globalSearch').value.toLowerCase().trim();
+      const cfNum    = document.getElementById('cf-num').value.toLowerCase().trim();
+      const cfName   = document.getElementById('cf-name').value.toLowerCase().trim();
+      const cfFmt    = document.getElementById('cf-format').value;
+      const cfCourse = document.getElementById('cf-course').value.toLowerCase().trim();
+      const cfDate   = document.getElementById('cf-date').value.toLowerCase().trim();
+      const cfStatus = document.getElementById('cf-status').value;
+
+      filteredMatches = MATCHES.filter(m => {
+        if (gf && m.format !== gf) return false;
+        if (gs && m.status !== gs) return false;
+        if (cfFmt && m.format !== cfFmt) return false;
+        if (cfStatus && m.status !== cfStatus) return false;
+        if (cfNum    && !m.num.toLowerCase().includes(cfNum)) return false;
+        if (cfName   && !m.name.toLowerCase().includes(cfName)) return false;
+        if (cfCourse && !m.course.toLowerCase().includes(cfCourse)) return false;
+        if (cfDate   && !m.date.toLowerCase().includes(cfDate)) return false;
+        if (search) {
+          const haystack = [
+            m.num, m.name, m.course, m.date,
+            FORMAT_LABELS[m.format],
+            m.foursome ? m.foursome.d.join(' ') + ' ' + m.foursome.r.join(' ') : '',
+            m.singles  ? m.singles.d + ' ' + m.singles.r : ''
+          ].join(' ').toLowerCase();
+          if (!haystack.includes(search)) return false;
+        }
+        return true;
+      });
+
+      currentPage = 1;
+      renderTable();
+    }
+
+    /* ── Render ── */
+    function renderTable() {
+      const total = filteredMatches.length;
+      const pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+      if (currentPage > pages) currentPage = pages;
+
+      const start = (currentPage - 1) * PAGE_SIZE;
+      const slice = filteredMatches.slice(start, start + PAGE_SIZE);
+
+      const tbody = document.getElementById('matchTableBody');
+
+      if (slice.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6"><div class="table-empty">No matches found</div></td></tr>`;
+      } else {
+        tbody.innerHTML = slice.map(m => `
+          <tr>
+            <td>${m.num}</td>
+            <td class="match-name">${m.name}</td>
+            <td>${formatPill(m.format)}</td>
+            <td>${m.course}</td>
+            <td>${m.date}</td>
+            <td>${statusCell(m)}</td>
+          </tr>
+        `).join('');
+      }
+
+      // Count label
+      document.getElementById('filterCount').textContent =
+        total < MATCHES.length ? `${total} of ${MATCHES.length} matches` : `${MATCHES.length} matches`;
+
+      renderPagination(total, pages);
+      updateScoreboard();
+    }
+
+    /* ── Pagination ── */
+    function renderPagination(total, pages) {
+      const bar = document.getElementById('paginationBar');
+      if (pages <= 1) { bar.innerHTML = ''; return; }
+
+      const start = (currentPage - 1) * PAGE_SIZE + 1;
+      const end   = Math.min(currentPage * PAGE_SIZE, total);
+
+      let btns = '';
+      // Prev
+      btns += `<button class="page-btn" onclick="goPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>&lsaquo;</button>`;
+
+      // Page numbers — show up to 5 around current
+      const range = pageRange(currentPage, pages);
+      let prevN = null;
+      for (const n of range) {
+        if (prevN !== null && n - prevN > 1) {
+          btns += `<button class="page-btn" disabled style="border:none;padding:0 4px;min-width:auto;color:var(--grey)">…</button>`;
+        }
+        btns += `<button class="page-btn ${n === currentPage ? 'active' : ''}" onclick="goPage(${n})">${n}</button>`;
+        prevN = n;
+      }
+
+      // Next
+      btns += `<button class="page-btn" onclick="goPage(${currentPage + 1})" ${currentPage === pages ? 'disabled' : ''}>&rsaquo;</button>`;
+
+      bar.innerHTML = `
+        <span class="pagination-info">${start}–${end} of ${total}</span>
+        <div class="page-controls">${btns}</div>
+      `;
+    }
+
+    function pageRange(current, total) {
+      const delta = 2;
+      const pages = [];
+      const left  = Math.max(1, current - delta);
+      const right = Math.min(total, current + delta);
+      if (left > 1)     pages.push(1);
+      if (left > 2)     pages.push(-1); // ellipsis marker (handled in render)
+      for (let i = left; i <= right; i++) pages.push(i);
+      if (right < total - 1) pages.push(-1);
+      if (right < total)     pages.push(total);
+      // deduplicate
+      return [...new Set(pages)].filter(x => x > 0);
+    }
+
+    function goPage(n) {
+      const pages = Math.ceil(filteredMatches.length / PAGE_SIZE);
+      if (n < 1 || n > pages) return;
+      currentPage = n;
+      renderTable();
+      document.querySelector('.schedule-section').scrollIntoView({ behavior:'smooth', block:'start' });
+    }
+
+    /* ── Scoreboard ── */
+    function updateScoreboard() {
+      let dTotal = 0, rTotal = 0;
+      MATCHES.forEach(m => {
+        if (m.status === 'played' && m.points) {
+          dTotal += m.points.d;
+          rTotal += m.points.r;
+        }
+      });
+      const hasScores = MATCHES.some(m => m.status === 'played');
+      document.getElementById('scoreD').textContent = hasScores ? dTotal  : '–';
+      document.getElementById('scoreR').textContent = hasScores ? rTotal  : '–';
+    }
+
+    /* ── Modal ── */
+    function openModal(id) {
+      const m = MATCHES.find(x => x.id === id);
+      if (!m) return;
+
+      document.getElementById('modalMatchNum').textContent   = `Match ${m.num}`;
+      document.getElementById('modalMatchTitle').textContent = m.name;
+
+      let body = `
+        <div class="modal-meta">
+          <div class="modal-meta-item">
+            <span class="modal-meta-label">Date</span>
+            <span class="modal-meta-value">${m.date}</span>
+          </div>
+          <div class="modal-meta-item">
+            <span class="modal-meta-label">Course</span>
+            <span class="modal-meta-value">${m.course}</span>
+          </div>
+          <div class="modal-meta-item">
+            <span class="modal-meta-label">Format</span>
+            <span class="modal-meta-value">${FORMAT_LABELS[m.format]}</span>
+          </div>
+          <div class="modal-meta-item">
+            <span class="modal-meta-label">Status</span>
+            <span class="modal-meta-value">${m.status === 'tbd' ? 'Upcoming' : 'Completed'}</span>
+          </div>
+        </div>
+        <div class="modal-divider"></div>
+      `;
+
+      if (m.format === 'singles' && m.singles) {
+        const s = m.singles;
+        const dPts = m.points ? m.points.d : null;
+        const rPts = m.points ? m.points.r : null;
+
+        body += `<div class="modal-players-label">Head-to-Head</div>`;
+        body += `
+          <div class="modal-team-row">
+            <span class="modal-team-badge modal-badge-d">Team D</span>
+            <span class="modal-team-players">${s.d}</span>
+            ${dPts !== null
+              ? `<span class="modal-team-score ${dPts > rPts ? 'modal-score-d' : dPts === rPts ? 'modal-score-half' : 'modal-score-r'}">${dPts}</span>`
+              : `<span class="modal-team-score modal-score-pending">—</span>`}
+          </div>
+          <div class="modal-team-row">
+            <span class="modal-team-badge modal-badge-r">Team R</span>
+            <span class="modal-team-players">${s.r}</span>
+            ${rPts !== null
+              ? `<span class="modal-team-score ${rPts > dPts ? 'modal-score-r' : rPts === dPts ? 'modal-score-half' : 'modal-score-d'}">${rPts}</span>`
+              : `<span class="modal-team-score modal-score-pending">—</span>`}
+          </div>
+        `;
+
+        if (s.netScore) {
+          body += `
+            <div class="modal-net-score">
+              <span class="modal-net-label">Net Score</span>
+              <span class="modal-net-value">${s.netScore}</span>
+            </div>
+          `;
+        }
+
+      } else if (m.foursome) {
+        const f = m.foursome;
+        const dPts = m.points ? m.points.d : null;
+        const rPts = m.points ? m.points.r : null;
+
+        body += `<div class="modal-players-label">Foursome</div>`;
+        body += `
+          <div class="modal-team-row">
+            <span class="modal-team-badge modal-badge-d">Team D</span>
+            <span class="modal-team-players">${f.d[0]}<br>${f.d[1]}</span>
+            ${dPts !== null
+              ? `<span class="modal-team-score ${dPts > rPts ? 'modal-score-d' : dPts === rPts ? 'modal-score-half' : 'modal-score-r'}">${dPts}</span>`
+              : `<span class="modal-team-score modal-score-pending">—</span>`}
+          </div>
+          <div class="modal-team-row">
+            <span class="modal-team-badge modal-badge-r">Team R</span>
+            <span class="modal-team-players">${f.r[0]}<br>${f.r[1]}</span>
+            ${rPts !== null
+              ? `<span class="modal-team-score ${rPts > dPts ? 'modal-score-r' : rPts === dPts ? 'modal-score-half' : 'modal-score-d'}">${rPts}</span>`
+              : `<span class="modal-team-score modal-score-pending">—</span>`}
+          </div>
+        `;
+      }
+
+      document.getElementById('modalBody').innerHTML = body;
+
+      const overlay = document.getElementById('matchModal');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('matchModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function handleOverlayClick(e) {
+      if (e.target === document.getElementById('matchModal')) closeModal();
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    /* ── Init ── */
+    renderTable();
+  </script>
+
+</body>
+</html>
