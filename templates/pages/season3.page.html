@@ -1389,6 +1389,7 @@
         MATCHES        = data.matches  || [];
         TEAM_D_PLAYERS = (data.rosters && data.rosters.teamD) || [];
         TEAM_R_PLAYERS = (data.rosters && data.rosters.teamR) || [];
+        filteredMatches = [...MATCHES]; // reset after load — was [] at declaration time
       } catch(e) {
         console.warn('Could not load schedule from KV:', e);
         logError('fetchSchedule', e);
