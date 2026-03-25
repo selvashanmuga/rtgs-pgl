@@ -21,14 +21,12 @@ _Brainstormed: 20 March 2026_
 
 ---
 
-## 2. Player Profiles
+## 2. Player Profiles — COMPLETED
 
-Each of the 16 players gets a profile page showing:
-- Win/Loss/Halve record across all matches played
-- Formats they've played (Four Balls, Scramble, Alternate Shot, Singles)
-- Partners they've played with
-- Head-to-head record against opponents
-- Season 3 contribution to team points
+Each of the 16 players gets a profile modal (click their name in the Team Rosters section):
+- ✅ Win/Loss/Halve record and points contributed across all matches played
+- ✅ Full match history table — all formats, with result indicator and link to match detail
+- ✅ Admin can edit player Name and HCP directly in the modal (saved to KV)
 
 ---
 
@@ -83,6 +81,31 @@ Each of the 16 players gets a profile page showing:
 
 ---
 
+## 9. Photo Gallery
+
+A scrollable gallery of match-day photos, accessible from the main navigation. Players and fans can browse pictures with a short caption alongside each photo.
+
+**User flows:**
+- **All visitors (fan/captain):** Browse the gallery — infinite vertical scroll through uploaded photos, each showing the image, a one-liner description, and the match/date it belongs to
+- **Organiser login (new `organiser` role):** Can upload photos with a short description (max ~140 chars). Upload UI is only visible when logged in as organiser. No match editing rights — photo upload only.
+- **Admin:** Can also upload, and additionally delete any photo
+
+**Technical considerations:**
+- Photos can't be stored in Cloudflare KV (binary size limits) — needs Cloudflare R2 (object storage) or a third-party image host (e.g. Cloudinary free tier)
+- Metadata (description, uploader, date, match reference) stored in KV as a JSON list — key `season3_gallery`
+- New API endpoints: `POST /api/gallery` (upload metadata + trigger R2 put), `GET /api/gallery` (public, returns list)
+- New `organiser` role in AUTH_USERS worker secret — same auth pattern as captain/admin
+- Gallery page can be a new route `/gallery.html` or a modal/section within `season3.html`
+- Scrolling: simple CSS column/masonry layout, no JS library needed
+- Mobile: single-column scroll; desktop: 2–3 column grid
+
+**Open decisions before building:**
+1. Separate `/gallery.html` page or a section inside `season3.html`?
+2. R2 for image storage or a hosted image service (Cloudinary/Imgbb)?
+3. Should fans be able to "like" or react to photos, or strictly read-only?
+
+---
+
 ## Priority Recommendation
 
 | Priority | Feature | Why |
@@ -90,5 +113,6 @@ Each of the 16 players gets a profile page showing:
 | 1 | **Dual-captain score approval** ✅ | Removes the admin bottleneck; both captains own the results |
 | 2 | **Real backend (Cloudflare KV/D1)** ✅ | Makes results shared across all devices — prerequisite for #1 |
 | 3 | **Live leaderboard with progress bar** ✅ | Most engaging feature for all 16 players |
-| 4 | **Player profiles** | Personal investment — everyone wants to see their own stats |
-| 5 | **Match day page** | Practical utility on the day of play |
+| 4 | **Player profiles** ✅ | Personal investment — everyone wants to see their own stats |
+| 5 | **Photo gallery** | Social glue — brings the season to life with match-day memories |
+| 6 | **Match day page** | Practical utility on the day of play |
