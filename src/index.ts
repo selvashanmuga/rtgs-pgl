@@ -7,7 +7,7 @@
  *   GET  /api/schedule  → read Season 3 match schedule and rosters from KV (public)
  *   POST /api/schedule  → write schedule/rosters to KV (requires X-Write-Key or admin Bearer)
  *   POST /api/track     → append analytics event to daily KV key (open)
- *   GET  /api/analytics → read analytics events for last N days (requires X-Write-Key)
+ *   GET  /api/analytics → read analytics events for last N days (requires X-Write-Key or Bearer with admin/captain/organiser)
  *   POST /api/login     → authenticate user, return signed token
  *   POST /api/log       → store client-side error log entry (open)
  *   GET  /api/log       → read error log entries for last N days (requires auth)
@@ -280,7 +280,13 @@ export default {
     // ── GET /api/analytics — read events for last N days (auth required) ──
     if (url.pathname === '/api/analytics' && request.method === 'GET') {
       const writeKey = request.headers.get('X-Write-Key') ?? '';
-      if (!env.WRITE_KEY || writeKey !== env.WRITE_KEY) {
+      const writeKeyOk = env.WRITE_KEY && writeKey === env.WRITE_KEY;
+      let bearerOk = false;
+      if (!writeKeyOk) {
+        const tokenPayload = await verifyBearer(request.clone(), env.AUTH_HMAC_SECRET ?? '');
+        bearerOk = tokenPayload !== null && (tokenPayload.role === 'admin' || tokenPayload.role === 'captain' || tokenPayload.role === 'organiser');
+      }
+      if (!writeKeyOk && !bearerOk) {
         return json({ error: 'Unauthorised' }, 401);
       }
 
@@ -542,7 +548,7 @@ export default {
 
       // Inject staging banner — staging only
       if (url.hostname.includes('staging')) {
-        const banner = `<div style="position:fixed;top:0;left:0;right:0;z-index:9999;background:#b45309;color:#fff;text-align:center;padding:8px 16px;font-family:Raleway,sans-serif;font-size:13px;font-weight:600;letter-spacing:0.05em;">STAGING — This is not the live site. Data here is independent of production.</div><div style="height:37px"></div>`;
+        const banner = `<style>nav{top:32px !important;}div.header{top:32px !important;}</style><div style="position:fixed;top:0;left:0;right:0;z-index:9999;background:#b45309;color:#fff;text-align:center;padding:4px 12px;font-family:Raleway,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">&#9651; STAGING — not the live site</div><div style="height:29px"></div>`;
         html = html.replace('<body>', '<body>' + banner);
       }
 
