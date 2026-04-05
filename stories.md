@@ -658,7 +658,7 @@ OFFICIAL SPONSOR  [xduce-logo]  Visit xduce.com ↗
 | SHA | Date | Message |
 |-----|------|---------|
 | `90e7877` | 2026-04-04 | feat: PGL-023 sponsor badge — new line on landing page, centered + borderless strip on season3 |
-| *(this PR)* | 2026-04-05 | fix: PGL-023 sponsor improvements — move outside badge, "Sponsored by", logo 1.5× size, xduce link |
+| `44f7a22` | 2026-04-05 | fix: PGL-023 sponsor improvements — move outside badge, Sponsored by, logo 1.5x, xduce link |
 
 ---
 
