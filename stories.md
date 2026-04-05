@@ -34,7 +34,7 @@ _JIRA-ready format. Each story maps 1:1 to a JIRA issue when migrated._
 | [PGL-020](#pgl-020) | Auth Security Audit — Credentials Compliance | Chore | P1 | Done |
 | [PGL-021](#pgl-021) | Application Architecture SVG Diagram | Chore | P2 | Planned |
 | [PGL-029](#pgl-029) | Custom Domain for Staging — staging.rtgspgl.org | Chore | P2 | Planned |
-| [PGL-028](#pgl-028) | Capture City & ISP in Analytics Events | Feature | P2 | Planned |
+| [PGL-028](#pgl-028) | Capture City & ISP in Analytics Events | Feature | P2 | Done |
 | [PGL-027](#pgl-027) | Extend Analytics Access to Captains and Organisers | Feature | P2 | Planned |
 | [PGL-026](#pgl-026) | Gallery Audit Log — Upload & Delete Tracking | Feature | P1 | Planned |
 | [PGL-025](#pgl-025) | Course Names Popup — "10+ Courses" hero click | Feature | P2 | Done |
@@ -898,9 +898,9 @@ _Not started._
 |-------|-------|
 | Type | Feature |
 | Priority | P2 |
-| Status | Planned |
+| Status | Done |
 | Created | 2026-04-04 |
-| Completed | — |
+| Completed | 2026-04-05 |
 
 ### Description
 Enrich each analytics event with the visitor's city and ISP name. All data is available from Cloudflare request metadata — no external API calls needed.
@@ -935,7 +935,9 @@ Full IP address is intentionally NOT stored — city + ISP is sufficient for ana
 - Analytics table shows City and ISP columns; old entries display `—`
 
 ### Commits
-_Not started._
+| SHA | Date | Message |
+|-----|------|---------|
+| `10ba906` | 2026-04-05 | feat: PGL-028 capture city & ISP in analytics events, show in dashboard table |
 
 ---
 
