@@ -35,7 +35,7 @@ _JIRA-ready format. Each story maps 1:1 to a JIRA issue when migrated._
 | [PGL-021](#pgl-021) | Application Architecture SVG Diagram | Chore | P2 | Planned |
 | [PGL-029](#pgl-029) | Custom Domain for Staging — staging.rtgspgl.org | Chore | P2 | Planned |
 | [PGL-028](#pgl-028) | Capture City & ISP in Analytics Events | Feature | P2 | Done |
-| [PGL-027](#pgl-027) | Extend Analytics Access to Captains and Organisers | Feature | P2 | Planned |
+| [PGL-027](#pgl-027) | Extend Analytics Access to Captains and Organisers | Feature | P2 | Done |
 | [PGL-026](#pgl-026) | Gallery Audit Log — Upload & Delete Tracking | Feature | P1 | Planned |
 | [PGL-025](#pgl-025) | Course Names Popup — "10+ Courses" hero click | Feature | P2 | Done |
 | [PGL-024](#pgl-024) | Score Update Audit Log | Feature | P1 | Planned |
@@ -852,41 +852,26 @@ _Not started._
 |-------|-------|
 | Type | Feature |
 | Priority | P2 |
-| Status | Planned |
+| Status | Done |
 | Created | 2026-04-04 |
-| Completed | — |
+| Completed | 2026-04-05 |
 
 ### Description
-Currently `/analytics.html` is Admin-only. Extend full read access to Captains and Organisers — same page, same data, no filtering by role.
-
-**Current access control (two places to update):**
-
-1. **Frontend** — `public/analytics.html` line ~137:
-   ```js
-   if (SESSION.role !== 'admin') { window.location.replace('/'); }
-   ```
-   Change to allow `captain` and `organiser` roles too:
-   ```js
-   if (!['admin','captain','organiser'].includes(SESSION.role)) { window.location.replace('/'); }
-   ```
-
-2. **Backend** — `src/index.ts` GET `/api/analytics` handler (lines ~279–282):
-   Currently requires `X-Write-Key` OR Bearer token with `role === 'admin'`.
-   Update to also accept Bearer tokens with `role === 'captain'` or `role === 'organiser'`.
-
-**No changes to the analytics data displayed** — all roles see the same full dataset (page views, events, persona breakdown, username, country, timestamp).
-
-**Nav link** — if `/analytics.html` is linked from a nav or dashboard menu, ensure the link is visible to captains and organisers too (not just admin).
+Extended `/analytics.html` read access to Captains and Organisers. Same page, same full dataset, no filtering by role. Added Analytics link to top nav on index and season3 pages (role-gated, hidden for fans). On mobile (≤640px), nav text links collapse into a ⋮ overflow dropdown. Also fixed staging banner obscuring the fixed nav on mobile.
 
 ### Acceptance Criteria
-- Captain can navigate to `/analytics.html` and see full analytics data
-- Organiser can navigate to `/analytics.html` and see full analytics data
-- Fan / unauthenticated users are still redirected away
-- Backend `GET /api/analytics` returns data for captain and organiser Bearer tokens
-- No changes to the data shown or the page layout
+- [x] Captain can navigate to `/analytics.html` and see full analytics data
+- [x] Organiser can navigate to `/analytics.html` and see full analytics data
+- [x] Fan / unauthenticated users are still redirected away
+- [x] Backend `GET /api/analytics` returns data for captain and organiser Bearer tokens
+- [x] Analytics link visible in top nav for admin/captain/organiser; hidden for fans
+- [x] Mobile: nav links collapse into ⋮ overflow menu; Analytics item is role-gated
+- [x] Staging banner no longer obscures nav on mobile
 
 ### Commits
-_Not started._
+| SHA | Date | Message |
+|-----|------|---------|
+| `d856ae7` | 2026-04-05 | feat: PGL-027 extend analytics access to captains and organisers |
 
 ---
 
