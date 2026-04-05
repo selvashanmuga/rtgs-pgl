@@ -1370,7 +1370,7 @@
     <div class="team-clash">
       <div class="team-panel team-panel-d">
         <div class="team-eyebrow">Captain's Side</div>
-        <div class="team-name"><span class="team-accent-d">Team</span><br>Dhurandhar</div>
+        <div class="team-name"><span class="team-accent-d">Team</span><br>Europe</div>
         <div class="team-sub">8 Players</div>
         <div class="team-bar team-bar-d"></div>
       </div>
@@ -1385,7 +1385,7 @@
       </div>
       <div class="team-panel team-panel-r">
         <div class="team-eyebrow">Captain's Side</div>
-        <div class="team-name"><span class="team-accent-r">Team</span><br>Rushabh</div>
+        <div class="team-name"><span class="team-accent-r">Team</span><br>USA</div>
         <div class="team-sub">8 Players</div>
         <div class="team-bar team-bar-r"></div>
       </div>
@@ -1398,9 +1398,9 @@
         <thead>
           <tr>
             <th>Format</th>
-            <th>Team D</th>
+            <th>Team Europe</th>
             <th></th>
-            <th>Team R</th>
+            <th>Team USA</th>
             <th>Halved</th>
           </tr>
         </thead>
@@ -1416,21 +1416,21 @@
       </div>
       <div class="roster-grids">
 
-        <!-- Team Dhurandhar -->
+        <!-- Team Europe -->
         <div class="roster-card">
           <div class="roster-header roster-header-d">
             <div class="roster-header-dot roster-header-dot-d"></div>
-            <span class="roster-header-name">Team Dhurandhar</span>
+            <span class="roster-header-name">Team Europe</span>
             <span class="roster-header-count">8 Players</span>
           </div>
           <ul class="roster-list" id="roster-list-D"></ul>
         </div>
 
-        <!-- Team Rushabh -->
+        <!-- Team USA -->
         <div class="roster-card">
           <div class="roster-header roster-header-r">
             <div class="roster-header-dot roster-header-dot-r"></div>
-            <span class="roster-header-name">Team Rushabh</span>
+            <span class="roster-header-name">Team USA</span>
             <span class="roster-header-count">8 Players</span>
           </div>
           <ul class="roster-list" id="roster-list-R"></ul>
@@ -1630,7 +1630,7 @@
           <div class="result-radio-group">
             <label class="result-radio-opt">
               <input type="radio" name="outcome" value="d" id="outcomeD" />
-              <span class="result-radio-label win-d" id="outcomeDLabel">Team D Wins</span>
+              <span class="result-radio-label win-d" id="outcomeDLabel">Team Europe Wins</span>
             </label>
             <label class="result-radio-opt">
               <input type="radio" name="outcome" value="halve" id="outcomeH" />
@@ -1638,7 +1638,7 @@
             </label>
             <label class="result-radio-opt">
               <input type="radio" name="outcome" value="r" id="outcomeR" />
-              <span class="result-radio-label win-r" id="outcomeRLabel">Team R Wins</span>
+              <span class="result-radio-label win-r" id="outcomeRLabel">Team USA Wins</span>
             </label>
           </div>
         </div>
@@ -1703,22 +1703,22 @@
 
     /* ── Player roster — defaults; overridden by KV if admin has saved edits ── */
     const DEFAULT_PLAYERS = [
-      { id: 'D1', name: 'Vikrant Patil',    team: 'D', hcp: 16 },
-      { id: 'D2', name: 'Anuj Pandey',      team: 'D', hcp: 14 },
-      { id: 'D3', name: 'Anirudha',         team: 'D', hcp: 16 },
-      { id: 'D4', name: 'Selva S Sundaram', team: 'D', hcp: 16 },
-      { id: 'D5', name: 'Raghu Sundaram',   team: 'D', hcp: 20 },
-      { id: 'D6', name: 'Hemang C',         team: 'D', hcp: 20 },
-      { id: 'D7', name: 'Nimesh Dave',      team: 'D', hcp: 20 },
-      { id: 'D8', name: 'Bala Sankaran',    team: 'D', hcp: 22 },
-      { id: 'R1', name: 'Shailendra Singh', team: 'R', hcp: 14 },
-      { id: 'R2', name: 'Satyapal P',       team: 'R', hcp: 16 },
-      { id: 'R3', name: 'John C',           team: 'R', hcp: 16 },
-      { id: 'R4', name: 'Rahul R',          team: 'R', hcp: 16 },
-      { id: 'R5', name: 'Mazz',             team: 'R', hcp: 20 },
-      { id: 'R6', name: 'Rushabh L',        team: 'R', hcp: 20 },
-      { id: 'R7', name: 'Srikant N',        team: 'R', hcp: 22 },
-      { id: 'R8', name: 'DZ',               team: 'R', hcp: 16 },
+      { id: 'E1', name: 'Vikrant Patil',    team: 'D', hcp: 16 },
+      { id: 'E2', name: 'Anuj Pandey',      team: 'D', hcp: 14 },
+      { id: 'E3', name: 'Anirudha',         team: 'D', hcp: 16 },
+      { id: 'E4', name: 'Selva S Sundaram', team: 'D', hcp: 16 },
+      { id: 'E5', name: 'Raghu Sundaram',   team: 'D', hcp: 20 },
+      { id: 'E6', name: 'Hemang C',         team: 'D', hcp: 20 },
+      { id: 'E7', name: 'Nimesh Dave',      team: 'D', hcp: 20 },
+      { id: 'E8', name: 'Bala Sankaran',    team: 'D', hcp: 22 },
+      { id: 'U1', name: 'Shailendra Singh', team: 'R', hcp: 14 },
+      { id: 'U2', name: 'Satyapal P',       team: 'R', hcp: 16 },
+      { id: 'U3', name: 'John C',           team: 'R', hcp: 16 },
+      { id: 'U4', name: 'Rahul R',          team: 'R', hcp: 16 },
+      { id: 'U5', name: 'Mazz',             team: 'R', hcp: 20 },
+      { id: 'U6', name: 'Rushabh L',        team: 'R', hcp: 20 },
+      { id: 'U7', name: 'Srikant N',        team: 'R', hcp: 22 },
+      { id: 'U8', name: 'DZ',               team: 'R', hcp: 20 },
     ];
     let PLAYERS = DEFAULT_PLAYERS.map(p => ({ ...p }));
 
@@ -1829,7 +1829,7 @@
         <tr>
           <td class="lb-rank">${i + 1}</td>
           <td><button class="lb-name-btn" onclick="openPlayerProfile('${s.id}')">${s.name}</button></td>
-          <td class="${s.team === 'D' ? 'lb-team-d' : 'lb-team-r'}">${s.team === 'D' ? 'D' : 'R'}</td>
+          <td class="${s.team === 'D' ? 'lb-team-d' : 'lb-team-r'}">${s.team === 'D' ? 'Europe' : 'USA'}</td>
           <td class="lb-pts">${s.pts}</td>
           <td>${s.played}</td>
           <td>${s.wins}</td>
@@ -1984,7 +1984,7 @@
       if (!player) return;
 
       const isAdmin = SESSION && SESSION.role === 'admin';
-      const teamName = player.team === 'D' ? 'Team Dhurandhar' : 'Team Rushabh';
+      const teamName = player.team === 'D' ? 'Team Europe' : 'Team USA';
       const badgeClass = player.team === 'D' ? 'modal-badge-d' : 'modal-badge-r';
 
       // Compute stats from MATCHES
@@ -2180,9 +2180,9 @@
       const dClass = d > r ? 'status-d' : (d === r ? 'status-halved' : 'status-d');
       const rClass = r > d ? 'status-r' : (r === d ? 'status-halved' : 'status-r');
       return `<span class="status-result">
-        <span class="${dClass}">D: ${d}</span>
+        <span class="${dClass}">EUR: ${d}</span>
         <span class="status-sep">·</span>
-        <span class="${rClass}">R: ${r}</span>
+        <span class="${rClass}">USA: ${r}</span>
       </span>`;
     }
 
@@ -2395,14 +2395,14 @@
         body += `<div class="modal-players-label">Head-to-Head</div>`;
         body += `
           <div class="modal-team-row">
-            <span class="modal-team-badge modal-badge-d">Team D</span>
+            <span class="modal-team-badge modal-badge-d">Team Europe</span>
             <span class="modal-team-players">${s.d}</span>
             ${dPts !== null
               ? `<span class="modal-team-score ${isUnconfirmed ? 'modal-score-unconfirmed' : dPts > rPts ? 'modal-score-d' : dPts === rPts ? 'modal-score-half' : 'modal-score-r'}">${dPts}</span>`
               : `<span class="modal-team-score modal-score-pending">—</span>`}
           </div>
           <div class="modal-team-row">
-            <span class="modal-team-badge modal-badge-r">Team R</span>
+            <span class="modal-team-badge modal-badge-r">Team USA</span>
             <span class="modal-team-players">${s.r}</span>
             ${rPts !== null
               ? `<span class="modal-team-score ${isUnconfirmed ? 'modal-score-unconfirmed' : rPts > dPts ? 'modal-score-r' : rPts === dPts ? 'modal-score-half' : 'modal-score-d'}">${rPts}</span>`
@@ -2441,14 +2441,14 @@
         body += `<div class="modal-players-label">Foursome</div>`;
         body += `
           <div class="modal-team-row">
-            <span class="modal-team-badge modal-badge-d">Team D</span>
+            <span class="modal-team-badge modal-badge-d">Team Europe</span>
             <span class="modal-team-players">${f.d[0]}<br>${f.d[1]}</span>
             ${dPts !== null
               ? `<span class="modal-team-score ${isUnconfirmed ? 'modal-score-unconfirmed' : dPts > rPts ? 'modal-score-d' : dPts === rPts ? 'modal-score-half' : 'modal-score-r'}">${dPts}</span>`
               : `<span class="modal-team-score modal-score-pending">—</span>`}
           </div>
           <div class="modal-team-row">
-            <span class="modal-team-badge modal-badge-r">Team R</span>
+            <span class="modal-team-badge modal-badge-r">Team USA</span>
             <span class="modal-team-players">${f.r[0]}<br>${f.r[1]}</span>
             ${rPts !== null
               ? `<span class="modal-team-score ${isUnconfirmed ? 'modal-score-unconfirmed' : rPts > dPts ? 'modal-score-r' : rPts === dPts ? 'modal-score-half' : 'modal-score-d'}">${rPts}</span>`
@@ -2525,7 +2525,7 @@
 
     function roleLabel(session) {
       if (session.role === 'admin') return 'Admin';
-      return session.team === 'D' ? 'Captain · Dhurandhar' : 'Captain · Rushabh';
+      return session.team === 'D' ? 'Captain · Europe' : 'Captain · USA';
     }
 
     /* ── Nav user chip ── */
@@ -2606,7 +2606,7 @@
       document.getElementById('captainDashboardWrap').style.display = '';
 
       const team = SESSION.team;
-      const teamName = team === 'D' ? 'Team Dhurandhar' : 'Team Rushabh';
+      const teamName = team === 'D' ? 'Team Europe' : 'Team USA';
       const headerClass = team === 'D' ? 'captain-db-header-d' : 'captain-db-header-r';
       const myPts      = getTeamPoints(team);
       const oppPts     = getTeamPoints(team === 'D' ? 'R' : 'D');
@@ -2744,12 +2744,12 @@
       const playersDisplay = document.getElementById('playersDisplay');
       if (m.format === 'singles' && m.singles) {
         playersDisplay.innerHTML =
-          `<div class="result-players-row"><span class="result-players-team td">D</span><span class="result-players-names">${m.singles.d}</span></div>` +
-          `<div class="result-players-row"><span class="result-players-team tr">R</span><span class="result-players-names">${m.singles.r}</span></div>`;
+          `<div class="result-players-row"><span class="result-players-team td">E</span><span class="result-players-names">${m.singles.d}</span></div>` +
+          `<div class="result-players-row"><span class="result-players-team tr">U</span><span class="result-players-names">${m.singles.r}</span></div>`;
       } else if (m.foursome) {
         playersDisplay.innerHTML =
-          `<div class="result-players-row"><span class="result-players-team td">D</span><span class="result-players-names">${m.foursome.d.join(' &amp; ')}</span></div>` +
-          `<div class="result-players-row"><span class="result-players-team tr">R</span><span class="result-players-names">${m.foursome.r.join(' &amp; ')}</span></div>`;
+          `<div class="result-players-row"><span class="result-players-team td">E</span><span class="result-players-names">${m.foursome.d.join(' &amp; ')}</span></div>` +
+          `<div class="result-players-row"><span class="result-players-team tr">U</span><span class="result-players-names">${m.foursome.r.join(' &amp; ')}</span></div>`;
       } else {
         playersDisplay.innerHTML = '<span style="color:var(--grey);font-size:0.82rem;">TBD</span>';
       }
@@ -2864,7 +2864,7 @@
       // ── Form validation ──
       const outcome = document.querySelector('input[name="outcome"]:checked');
       if (!outcome) {
-        showFormError('Please select an outcome (Team D Wins / Halved / Team R Wins).');
+        showFormError('Please select an outcome (Team Europe Wins / Halved / Team USA Wins).');
         return;
       }
       const courseVal = document.getElementById('courseInput').value.trim();
