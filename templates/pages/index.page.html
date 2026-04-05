@@ -352,7 +352,9 @@
     /* Season status pill */
     .badge {
       display: inline-flex;
+      flex-wrap: wrap;
       align-items: center;
+      justify-content: center;
       gap: 14px;
       margin-top: 44px;
       padding: 12px 32px;
@@ -470,7 +472,8 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      margin-top: 12px;
+      flex-basis: 100%;
+      margin-top: 8px;
       opacity: 0;
       animation: fadeUp 0.9s 1.6s ease forwards;
     }
@@ -604,13 +607,12 @@
       <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0.6;flex-shrink:0;">
         <path d="M2 5h6M5.5 2.5L8 5l-2.5 2.5" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
+      <!-- Sponsor: XDuce -->
+      <div class="sponsor-presented">
+        <span class="sponsor-label">Presented by</span>
+        <img src="/pics/sponsors/xduce-logo-1.svg" alt="XDuce" class="sponsor-logo-sm" />
+      </div>
     </a>
-
-    <!-- Sponsor: XDuce -->
-    <div class="sponsor-presented">
-      <span class="sponsor-label">Presented by</span>
-      <img src="/pics/sponsors/xduce-logo-1.svg" alt="XDuce" class="sponsor-logo-sm" />
-    </div>
 
   </div>
 
