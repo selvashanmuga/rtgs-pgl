@@ -22,23 +22,23 @@ _JIRA-ready format. Each story maps 1:1 to a JIRA issue when migrated._
 | [PGL-008](#pgl-008) | DZ Handicap Correction (16 → 20) | Data | P0 | Done |
 | [PGL-009](#pgl-009) | Singles Schedule Redesign (M25–M40) | Data | P0 | Done |
 | [PGL-010](#pgl-010) | M1 / M4 Opponent Swap | Data | P1 | Done |
-| [PGL-011](#pgl-011) | Playoff Scenarios & Clinching Drama | Feature | P1 | Planned |
-| [PGL-012](#pgl-012) | Pre-Match Lineup Card | Feature | P2 | Planned |
-| [PGL-013](#pgl-013) | Streak Tracker & Weekly Awards | Feature | P2 | Planned |
-| [PGL-014](#pgl-014) | Match Day Page | Feature | P2 | Planned |
-| [PGL-015](#pgl-015) | Post-Match Replay & Highlights | Feature | P2 | Planned |
+| [PGL-011](#pgl-011) | Playoff Scenarios & Clinching Drama | Feature | P3 | Planned |
+| [PGL-012](#pgl-012) | Pre-Match Lineup Card | Feature | P3 | Planned |
+| [PGL-013](#pgl-013) | Streak Tracker & Weekly Awards | Feature | P3 | Planned |
+| [PGL-014](#pgl-014) | Match Day Page | Feature | P3 | Planned |
+| [PGL-015](#pgl-015) | Post-Match Replay & Highlights | Feature | P3 | Planned |
 | [PGL-016](#pgl-016) | Notifications / Announcements | Feature | P3 | Deferred |
 | [PGL-017](#pgl-017) | Match Predictions | Feature | P3 | Deferred |
 | [PGL-018](#pgl-018) | Season Archive | Feature | P3 | Deferred |
 | [PGL-019](#pgl-019) | SaaS / Multi-League Platform | Feature | P3 | Deferred |
 | [PGL-020](#pgl-020) | Auth Security Audit — Credentials Compliance | Chore | P1 | Done |
-| [PGL-021](#pgl-021) | Application Architecture SVG Diagram | Chore | P2 | Planned |
-| [PGL-029](#pgl-029) | Custom Domain for Staging — staging.rtgspgl.org | Chore | P2 | Planned |
+| [PGL-021](#pgl-021) | Application Architecture SVG Diagram | Chore | P1 | Planned |
+| [PGL-029](#pgl-029) | Custom Domain for Staging — staging.rtgspgl.org | Chore | P1 | Planned |
 | [PGL-028](#pgl-028) | Capture City & ISP in Analytics Events | Feature | P2 | Done |
 | [PGL-027](#pgl-027) | Extend Analytics Access to Captains and Organisers | Feature | P2 | Done |
-| [PGL-026](#pgl-026) | Gallery Audit Log — Upload & Delete Tracking | Feature | P1 | Planned |
+| [PGL-026](#pgl-026) | Gallery Audit Log — Upload & Delete Tracking | Feature | P3 | Planned |
 | [PGL-025](#pgl-025) | Course Names Popup — "10+ Courses" hero click | Feature | P2 | Done |
-| [PGL-024](#pgl-024) | Score Update Audit Log | Feature | P1 | Planned |
+| [PGL-024](#pgl-024) | Score Update Audit Log | Feature | P3 | Planned |
 | [PGL-022](#pgl-022) | Team Name Rename — Dhurandhar → Europe, Rushabh → USA | Data | P1 | Done |
 | [PGL-023](#pgl-023) | Add Sponsor — XDuce (index + season3 pages) | Feature | P2 | Done |
 
@@ -305,7 +305,7 @@ _KV-only change — no git commit generated._
 | Field | Value |
 |-------|-------|
 | Type | Feature |
-| Priority | P1 |
+| Priority | P3 |
 | Status | Planned |
 | Created | 2026-03-25 |
 | Completed | 2026-04-04 |
@@ -325,7 +325,7 @@ _Not started._
 | Field | Value |
 |-------|-------|
 | Type | Feature |
-| Priority | P2 |
+| Priority | P3 |
 | Status | Planned |
 | Created | 2026-03-25 |
 | Completed | 2026-04-04 |
@@ -345,7 +345,7 @@ _Not started._
 | Field | Value |
 |-------|-------|
 | Type | Feature |
-| Priority | P2 |
+| Priority | P3 |
 | Status | Planned |
 | Created | 2026-03-25 |
 | Completed | 2026-04-04 |
@@ -365,7 +365,7 @@ _Not started._
 | Field | Value |
 |-------|-------|
 | Type | Feature |
-| Priority | P2 |
+| Priority | P3 |
 | Status | Planned |
 | Created | 2026-03-25 |
 | Completed | 2026-04-04 |
@@ -385,7 +385,7 @@ _Not started._
 | Field | Value |
 |-------|-------|
 | Type | Feature |
-| Priority | P2 |
+| Priority | P3 |
 | Status | Planned |
 | Created | 2026-03-25 |
 | Completed | 2026-04-04 |
@@ -514,7 +514,7 @@ _Audit only — no code changes made._
 | Field | Value |
 |-------|-------|
 | Type | Chore |
-| Priority | P2 |
+| Priority | P1 |
 | Status | Planned |
 | Created | 2026-04-04 |
 | Completed | 2026-04-04 |
@@ -669,7 +669,7 @@ OFFICIAL SPONSOR  [xduce-logo]  Visit xduce.com ↗
 | Field | Value |
 |-------|-------|
 | Type | Feature |
-| Priority | P1 |
+| Priority | P3 |
 | Status | Planned |
 | Created | 2026-04-04 |
 | Completed | — |
@@ -793,7 +793,7 @@ _Not started._
 | Field | Value |
 |-------|-------|
 | Type | Feature |
-| Priority | P1 |
+| Priority | P3 |
 | Status | Planned |
 | Created | 2026-04-04 |
 | Completed | — |
@@ -933,7 +933,7 @@ Full IP address is intentionally NOT stored — city + ISP is sufficient for ana
 | Field | Value |
 |-------|-------|
 | Type | Chore |
-| Priority | P2 |
+| Priority | P1 |
 | Status | Planned |
 | Created | 2026-04-04 |
 | Completed | — |
